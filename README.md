@@ -4,7 +4,7 @@
 lol
 hallo
 ```
-## Semantic Versioning
+## Semantic Versioning :mage:
 
 This project is going utilize semantic versioning for its tagging.
 [semver.org](https://semver.org/)
