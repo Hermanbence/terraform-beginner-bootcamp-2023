@@ -87,3 +87,43 @@ https://en.wikipedia.org/wiki/Chmod
 ![Alt text](image-2.png)
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
+
+### Working Env Vars
+
+#### env command
+
+![Alt text](image-3.png)
+
+#### Setting and Unsetting Env Vars
+
+![Alt text](image-4.png)
+
+```sh
+HELLO= 'world' ./bin/print_message
+```
+Within a bash script we can set env without writing export eg. 
+
+```sh
+#!/usr/bin/env bash
+
+HELLO='word'
+
+echo $HELLO
+```
+
+#### Printing Vars
+
+We can print an env var using echo eg. `echo $HELLO`
+
+#### Scoping of Env Vars
+
+WHen you open up new bash terminals in VSCode it will not be aware of env vars that you have set in another window.
+
+If you want to Env Vars to persist across all future bash terminals that are open you need to set env vars in your bash profile eg. `.bash:profile`
+
+#### Persisting Env Vars in Gitpod
+
+![Alt text](image-5.png)
+
+![Alt text](image-6.png)
+
