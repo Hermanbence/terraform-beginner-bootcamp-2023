@@ -153,3 +153,11 @@ If it is succesful you should see a json payload return that looks like this:
 ```
 
 We'll need to generate AWS CL credits from IAM User in order to the user AWS CLI.
+
+```
+# Don't know why but the AWS_SECRET_ACCESS_KEY always the same as the AWS_ACCESS_KEY_ID.
+# need to [unset AWS_SECRET_ACCESS_KEY] and export AWS_SECRET_ACCESS_KEY='...' 
+
+echo $AWS_ACCESS_KEY_ID
+echo $AWS_SECRET_ACCESS_KEY
+```
