@@ -3,6 +3,8 @@
 ```
 lol
 hallo
+VSCode usefull things:
+multiple lines ALT+SHIFT+(arrow)
 ```
 ## Semantic Versioning :mage:
 
@@ -127,3 +129,35 @@ If you want to Env Vars to persist across all future bash terminals that are ope
 
 ![Alt text](image-6.png)
 
+### AWS CLI Installation
+
+AWS CLI is installed for the project via the bash script [`./bin/install_aws_cli`](./bin/install_aws_cli)
+
+[Getting started Install (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+[AWS CLI Env Vars](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+
+We can check our AWS credentials is configured correctly by running the following AWS CLI command:
+```sh
+aws sts get-caller-identity
+```
+
+If it is succesful you should see a json payload return that looks like this:
+
+```json
+{
+    "UserId": "AIDAWSADTPNQFITAAQWER8",
+    "Account": "123456789012",
+    "Arn": "arn:aws:iam::123456789012:user/
+    terraform-beginner-bootcamp"
+}
+```
+
+We'll need to generate AWS CL credits from IAM User in order to the user AWS CLI.
+
+```
+# Don't know why but the AWS_SECRET_ACCESS_KEY always the same as the AWS_ACCESS_KEY_ID.
+# need to [unset AWS_SECRET_ACCESS_KEY] and export AWS_SECRET_ACCESS_KEY='...' 
+
+echo $AWS_ACCESS_KEY_ID
+echo $AWS_SECRET_ACCESS_KEY
+```
