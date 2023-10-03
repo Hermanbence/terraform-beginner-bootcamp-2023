@@ -248,3 +248,7 @@ resource "aws_s3_bucket" "example" {
 - Because of this: "Bucket names can consist only of lowercase letters, numbers, dots (.), and hyphens (-)."
 
 I needed to add the arguement -->   **upper            = false**
+
+#### Terraform Cloud workspace vs project
+
+![workspace_vs_project](image-7.png)
