@@ -198,13 +198,20 @@ This will run a plan and pass the changeset to be execute by terraform. Apply sh
 
 If we want to automatically approve an apply we can provide the auto approve flag eg. `terrraform apply --auto-approve`
 
-### Terraform Lock Files
+#### Terraform Destroy
+
+`terraform destroy`
+This will destroy resources.
+
+You can also use the auto approve flag to skip the approve prompt.
+
+#### Terraform Lock Files
 
 `.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
 
 The Terraform Lock FIles should be committed to your Version Control System (VSC) eg. Github
 
-### Terraform State Files
+#### Terraform State Files
 
 `.terraform.tfstate` contain information about the current state of your infrastucture.
 
@@ -219,3 +226,25 @@ If you lose this file, you lose knowing the state of your infrastructure.
 ### Terraform Directory
 
 `.terraform` directory contains binaries of terraform providers.
+
+#### Terraform tips
+
+- Adding the ***"test-${...}"*** it means that it'll start with the "test-" word and after adding the random.result 
+
+```hcl
+resource "random_string" "bucket_name" {
+  lower            = true
+  upper            = false
+  length           = 32
+  special          = false
+  override_special = ""
+}
+
+resource "aws_s3_bucket" "example" {
+  bucket = "test-${random_string.bucket_name.result}"
+}
+```
+
+- Because of this: "Bucket names can consist only of lowercase letters, numbers, dots (.), and hyphens (-)."
+
+I needed to add the arguement -->   **upper            = false**
