@@ -61,32 +61,46 @@ This bash script is located here: [./bin/install_terraform_cli]()
 - This allow us an easier to debug and execute manually Terraform CLI install
 - This will allow better portablity for other projects that need to install Terraform CLI.
 
-#### Shebang
+#### Shebang Considerations
 
 A Shebang (prounced Sha-bang) tells the bash script what program that will interpet the script. eg. `#!/bin/bash`
 
-ChatGpt recommended this format for bash : `#!/usr/bin/env bash`
+ChatGPT recommended this format for bash: `#!/usr/bin/env bash`
 
-- for portability for different OS distributions
-- will seach the users's PATH for the bash executable
+- for portability for different OS distributions 
+-  will search the user's PATH for the bash executable
+
+https://en.wikipedia.org/wiki/Shebang_(Unix)
+
+#### Execution Considerations
 
 When executing the bash script we can use the `./` shorthand notiation to execute the bash script.
 
-https://hu.wikipedia.org/wiki/Shebang_(UNIX)
+eg. `./bin/install_terraform_cli`
 
-## Execution Considerations
+If we are using a script in .gitpod.yml  we need to point the script to a program to interpert it.
 
-![Alt text](image.png)
+eg. `source ./bin/install_terraform_cli`
 
-#### Linux Permissions Considuration
+#### Linux Permissions Considerations
 
-![Alt text](image-1.png)
+In order to make our bash scripts executable we need to change linux permission for the fix to be exetuable at the user mode.
+
+```sh
+chmod u+x ./bin/install_terraform_cli
+```
+
+alternatively:
+
+```sh
+chmod 744 ./bin/install_terraform_cli
+```
 
 https://en.wikipedia.org/wiki/Chmod
 
-### Github lifecycle (before, Init, Command)
+### Github Lifecycle (Before, Init, Command)
 
-![Alt text](image-2.png)
+We need to be careful when using the Init because it will not rerun if we restart an existing workspace.
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
 
@@ -94,21 +108,27 @@ https://www.gitpod.io/docs/configure/workspaces/tasks
 
 #### env command
 
-![Alt text](image-3.png)
+We can list out all Enviroment Variables (Env Vars) using the `env` command
+
+We can filter specific env vars using grep eg. `env | grep AWS_`
 
 #### Setting and Unsetting Env Vars
 
-![Alt text](image-4.png)
+In the terminal we can set using `export HELLO='world`
+
+In the terrminal we unset using `unset HELLO`
+
+We can set an env var temporarily when just running a command
 
 ```sh
-HELLO= 'world' ./bin/print_message
+HELLO='world' ./bin/print_message
 ```
-Within a bash script we can set env without writing export eg. 
+Within a bash script we can set env without writing export eg.
 
 ```sh
 #!/usr/bin/env bash
 
-HELLO='word'
+HELLO='world'
 
 echo $HELLO
 ```
@@ -125,9 +145,15 @@ If you want to Env Vars to persist across all future bash terminals that are ope
 
 #### Persisting Env Vars in Gitpod
 
-![Alt text](image-5.png)
+We can persist env vars into gitpod by storing them in Gitpod Secrets Storage.
 
-![Alt text](image-6.png)
+```
+gp env HELLO='world'
+```
+
+All future workspaces launched will set the env vars for all bash terminals opened in thoes workspaces.
+
+You can also set en vars in the `.gitpod.yml` but this can only contain non-senstive env vars.
 
 ### AWS CLI Installation
 
@@ -252,3 +278,35 @@ I needed to add the arguement -->   **upper            = false**
 #### Terraform Cloud workspace vs project
 
 ![workspace_vs_project](image-7.png)
+
+
+## Issues with Terraform Cloud Login and Gitpod Workspace
+
+When attempting to run `terraform login` it will launch bash a wiswig view to generate a token. However it does not work expected in Gitpod VsCode in the browser.
+
+The workaround is manually generate a token in Terraform Cloud
+
+```
+https://app.terraform.io/app/settings/tokens?source=terraform-login
+```
+
+Then create open the file manually here:
+
+```sh
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+open /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+
+Provide the following code (replace your token in the file):
+
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "YOUR-TERRAFORM-CLOUD-TOKEN"
+    }
+  }
+}
+``````
+
+We have automated this workaround with the following bash script [bin/generate_tfrc_credentials](bin/generate_tfrc_credentials)
