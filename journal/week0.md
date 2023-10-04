@@ -6,7 +6,6 @@ hallo
 VSCode usefull things:
 multiple lines ALT+SHIFT+(arrow)
 ```
-:collision:
 
 - [Semantic Versioning :mage:](#semantic-versioning--mage-)
 - [Install the Terraform CLI](#install-the-terraform-cli)
@@ -34,7 +33,7 @@ multiple lines ALT+SHIFT+(arrow)
     + [Terraform Lock Files](#terraform-lock-files)
     + [Terraform State Files](#terraform-state-files)
     + [Terraform Directory](#terraform-directory)
-    + [Terraform Tips :collision:](#terraform-tips--collision-)
+    + [Terraform Tips](#terraform-tips--collision-)
     + [Terraform Cloud workspace vs project](#terraform-cloud-workspace-vs-project) :collision:
 - [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
 
