@@ -310,8 +310,7 @@ I needed to add the arguement -->   **upper            = false**
 
 #### Terraform Cloud workspace vs project
 
-![workspace_vs_project](journal/TF_Cloud_workspace_vs_project.png)
-
+![TF_Cloud_workspace_vs_project](https://github.com/Hermanbence/terraform-beginner-bootcamp-2023/assets/107430840/73720646-ebee-4772-9f55-a29ce40d1998)
 
 ## Issues with Terraform Cloud Login and Gitpod Workspace
 
