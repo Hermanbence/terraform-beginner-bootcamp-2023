@@ -76,7 +76,6 @@ If we run Terraform plan is with attempt to put our infrstraucture back into the
 ```sh
 terraform apply -refresh-only -auto-approve
 ```
-
 ## Terraform Modules
 
 ### Terraform Module Structure
