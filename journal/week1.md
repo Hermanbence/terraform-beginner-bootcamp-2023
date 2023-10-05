@@ -71,6 +71,11 @@ If someone goes and delete or modifies cloud resource manually through ClickOps.
 
 If we run Terraform plan is with attempt to put our infrstraucture back into the expected state fixing Configuration Drift
 
+## Fix using Terraform Refresh
+
+```sh
+terraform apply -refresh-only -auto-approve
+```
 ## Terraform Modules
 
 ### Terraform Module Structure
